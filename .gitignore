@@ -1,43 +1,47 @@
 # Dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # Build output
 dist/
 
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
 # IDE
-.idea/
 .vscode/
+.idea/
 *.swp
 *.swo
-*~
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# Test coverage
+# Testing
 coverage/
-.nyc_output/
+.nyc_output
+
+# Logs
+logs
+*.log
 
 # Temporary files
-tmp/
-temp/
 *.tmp
+*.temp
 
-# Package files
-*.tgz
+# JavaScript files (except config files)
+*.js
+!jest.config.js
+!gulpfile.js
+!.eslintrc.js
 
-# Lock files (keep package-lock.json)
-yarn.lock
-pnpm-lock.yaml
+# TypeScript build info
+*.tsbuildinfo
