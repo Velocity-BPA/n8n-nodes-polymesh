@@ -12,32 +12,17 @@ export class PolymeshApi implements ICredentialType {
 			displayName: 'API Base URL',
 			name: 'baseUrl',
 			type: 'string',
-			default: 'https://mainnet-api.polymesh.network/api/v1',
+			default: 'https://mainnet-api.polymesh.network',
 			required: true,
+			description: 'The base URL for the Polymesh API',
 		},
 		{
-			displayName: 'Authentication Method',
-			name: 'authMethod',
-			type: 'options',
-			options: [
-				{
-					name: 'Wallet Signature',
-					value: 'signature',
-				},
-				{
-					name: 'API Key',
-					value: 'apiKey',
-				},
-			],
-			default: 'signature',
-		},
-		{
-			displayName: 'Polymesh DID',
-			name: 'did',
+			displayName: 'Wallet Address',
+			name: 'walletAddress',
 			type: 'string',
-			placeholder: '0x...',
-			description: 'Your Polymesh Decentralized Identity (DID)',
+			default: '',
 			required: true,
+			description: 'Your Polymesh wallet address for signing transactions',
 		},
 		{
 			displayName: 'Private Key',
@@ -46,30 +31,9 @@ export class PolymeshApi implements ICredentialType {
 			typeOptions: {
 				password: true,
 			},
-			displayOptions: {
-				show: {
-					authMethod: [
-						'signature',
-					],
-				},
-			},
-			description: 'Private key for signing transactions',
-		},
-		{
-			displayName: 'API Key',
-			name: 'apiKey',
-			type: 'string',
-			typeOptions: {
-				password: true,
-			},
-			displayOptions: {
-				show: {
-					authMethod: [
-						'apiKey',
-					],
-				},
-			},
-			description: 'API key for authenticated requests',
+			default: '',
+			required: true,
+			description: 'Your private key for signing transactions (keep secure)',
 		},
 		{
 			displayName: 'Network',
@@ -86,6 +50,8 @@ export class PolymeshApi implements ICredentialType {
 				},
 			],
 			default: 'mainnet',
+			required: true,
+			description: 'The Polymesh network to connect to',
 		},
 	];
 }
