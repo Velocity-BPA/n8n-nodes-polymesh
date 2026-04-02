@@ -8,25 +8,25 @@
 >
 > For licensing information, visit https://velobpa.com/licensing or contact licensing@velobpa.com.
 
-An n8n community node for Polymesh, the institutional-grade blockchain for regulated assets. This node provides 8 comprehensive resources enabling seamless integration with Polymesh's identity management, asset tokenization, portfolio management, and settlement infrastructure for compliant digital securities workflows.
+This n8n community node provides comprehensive integration with Polymesh blockchain platform, offering 6 resources for managing digital assets, identities, portfolios, transactions, compliance rules, and trading venues. Enable automated workflows for institutional-grade security token management and regulatory compliance on the Polymesh network.
 
 ![n8n Community Node](https://img.shields.io/badge/n8n-Community%20Node-blue)
 ![License](https://img.shields.io/badge/license-BSL--1.1-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
-![Polymesh](https://img.shields.io/badge/Polymesh-Compatible-green)
-![Blockchain](https://img.shields.io/badge/Blockchain-Enterprise-orange)
-![Security Tokens](https://img.shields.io/badge/Security%20Tokens-Compliant-purple)
+![Blockchain](https://img.shields.io/badge/blockchain-Polymesh-purple)
+![Security Tokens](https://img.shields.io/badge/tokens-Security%20Tokens-green)
+![Compliance](https://img.shields.io/badge/compliance-Institutional-orange)
 
 ## Features
 
-- **Identity Management** - Create, verify, and manage on-chain identities with KYC/AML compliance
-- **Asset Tokenization** - Issue, transfer, and manage security tokens with built-in compliance rules
-- **Portfolio Operations** - Handle multi-asset portfolios with granular permission controls
-- **Settlement Engine** - Execute atomic settlements with automated compliance verification
-- **Instruction Processing** - Create and manage complex multi-party transaction instructions
-- **Claims Framework** - Issue and verify regulatory claims for investor accreditation
-- **Block Explorer** - Query blockchain data, transactions, and historical records
-- **Transaction Management** - Submit, track, and validate on-chain transactions
+- **Asset Management** - Create, configure, and manage security tokens with built-in compliance
+- **Identity Operations** - Handle investor identities, KYC status, and regulatory attestations
+- **Portfolio Control** - Manage custodial portfolios and asset holdings across identities
+- **Transaction Monitoring** - Track, validate, and execute compliant blockchain transactions
+- **Compliance Automation** - Configure and enforce transfer restrictions and regulatory rules
+- **Venue Operations** - Manage trading venues, settlements, and institutional exchange activities
+- **Regulatory Support** - Built-in compliance frameworks for global securities regulations
+- **Enterprise Security** - Institutional-grade security with permissioned blockchain architecture
 
 ## Installation
 
@@ -61,198 +61,149 @@ n8n start
 
 | Field | Description | Required |
 |-------|-------------|----------|
-| API Key | Your Polymesh REST API authentication key | Yes |
-| Network | Polymesh network (mainnet, testnet) | Yes |
-| Signing Account | Account address for transaction signing | Yes |
-| Base URL | Custom API endpoint URL (optional) | No |
+| API Key | Polymesh network API key for authentication | Yes |
+| Network Environment | Target network (mainnet/testnet) | Yes |
+| Node URL | Custom Polymesh node endpoint (optional) | No |
 
 ## Resources & Operations
 
-### 1. Identities
+### 1. Asset
 
 | Operation | Description |
 |-----------|-------------|
-| Create | Register a new on-chain identity |
-| Get | Retrieve identity details and verification status |
-| Update | Modify identity attributes and metadata |
-| List | Get all identities with filtering options |
-| Verify | Perform identity verification checks |
-| Get Claims | Retrieve all claims associated with an identity |
-| Add Secondary Keys | Add secondary signing keys to identity |
-| Remove Secondary Keys | Remove secondary keys from identity |
+| Create | Create a new security token on Polymesh |
+| Get Details | Retrieve asset information and metadata |
+| Update Metadata | Modify asset documentation and details |
+| Freeze/Unfreeze | Control asset transfer capabilities |
+| Issue Tokens | Mint new tokens to specified identities |
+| Redeem Tokens | Burn tokens from circulation |
+| List Holdings | Get all holders and their balances |
+| Set Compliance Rules | Configure transfer restrictions |
 
-### 2. Assets
-
-| Operation | Description |
-|-----------|-------------|
-| Create | Issue a new security token with compliance rules |
-| Get | Retrieve asset details, supply, and metadata |
-| Update | Modify asset properties and compliance settings |
-| List | Get all assets with filtering and pagination |
-| Transfer | Execute compliant asset transfers |
-| Freeze | Freeze asset transfers for compliance |
-| Unfreeze | Unfreeze previously frozen assets |
-| Get Holders | Retrieve all current asset holders |
-| Get Transactions | Get asset transaction history |
-
-### 3. Portfolios
+### 2. Identity
 
 | Operation | Description |
 |-----------|-------------|
-| Create | Create new portfolio for asset management |
-| Get | Retrieve portfolio details and holdings |
-| Update | Modify portfolio settings and permissions |
-| List | Get all portfolios for an identity |
-| Get Holdings | Retrieve all asset holdings in portfolio |
-| Move Assets | Move assets between portfolios |
-| Grant Custody | Grant custody permissions to other identities |
-| Revoke Custody | Revoke previously granted custody permissions |
+| Create | Register a new identity on Polymesh |
+| Get Profile | Retrieve identity information and status |
+| Add Claim | Attach regulatory attestations or KYC data |
+| Remove Claim | Revoke existing claims or attestations |
+| List Claims | View all claims associated with identity |
+| Update Profile | Modify identity metadata and information |
+| Authorize Key | Grant permissions to signing keys |
+| Revoke Key | Remove key authorization |
 
-### 4. Settlements
-
-| Operation | Description |
-|-----------|-------------|
-| Create | Initiate new settlement between parties |
-| Get | Retrieve settlement details and status |
-| List | Get all settlements with filtering options |
-| Execute | Execute pending settlement transactions |
-| Reject | Reject pending settlement proposals |
-| Get Legs | Retrieve all legs of a settlement |
-| Add Instruction | Add new instruction to settlement |
-| Cancel | Cancel pending settlement |
-
-### 5. Instructions
+### 3. Portfolio
 
 | Operation | Description |
 |-----------|-------------|
-| Create | Create new transaction instruction |
-| Get | Retrieve instruction details and status |
-| List | Get all instructions with filtering |
-| Execute | Execute pending instruction |
-| Reject | Reject instruction proposal |
-| Update | Modify instruction parameters |
-| Get Affirms | Retrieve affirmation status from all parties |
-| Withdraw | Withdraw previously created instruction |
+| Create | Create a new custodial portfolio |
+| Get Details | Retrieve portfolio information and holdings |
+| Transfer Assets | Move assets between portfolios |
+| List Holdings | View all assets in portfolio |
+| Set Permissions | Configure access controls |
+| Delete Portfolio | Remove empty portfolio |
+| Get Transactions | Retrieve portfolio transaction history |
+| Update Metadata | Modify portfolio information |
 
-### 6. Claims
-
-| Operation | Description |
-|-----------|-------------|
-| Create | Issue new regulatory or investor claim |
-| Get | Retrieve claim details and verification status |
-| List | Get all claims with filtering options |
-| Verify | Verify claim authenticity and validity |
-| Revoke | Revoke previously issued claim |
-| Get by Identity | Retrieve all claims for specific identity |
-| Get by Scope | Get claims within specific regulatory scope |
-| Update | Modify existing claim parameters |
-
-### 7. Blocks
+### 4. Transaction
 
 | Operation | Description |
 |-----------|-------------|
-| Get Latest | Retrieve latest block information |
-| Get by Number | Get specific block by block number |
-| Get by Hash | Retrieve block by its hash |
-| List | Get multiple blocks with pagination |
-| Get Transactions | Retrieve all transactions in a block |
-| Get Events | Get all events emitted in a block |
-| Search | Search blocks by various criteria |
+| Submit | Execute a transaction on Polymesh |
+| Get Status | Check transaction confirmation status |
+| Get Details | Retrieve complete transaction information |
+| List History | Get transaction history for identity/asset |
+| Estimate Fees | Calculate transaction costs |
+| Batch Execute | Submit multiple transactions together |
+| Cancel Pending | Cancel unconfirmed transactions |
+| Validate | Pre-validate transaction compliance |
 
-### 8. Transactions
+### 5. Compliance
 
 | Operation | Description |
 |-----------|-------------|
-| Create | Create new transaction for submission |
-| Get | Retrieve transaction details and status |
-| List | Get transactions with filtering options |
-| Submit | Submit transaction to blockchain |
-| Get Receipt | Retrieve transaction execution receipt |
-| Get Events | Get events emitted by transaction |
-| Estimate Fee | Estimate transaction fees before submission |
-| Get by Block | Retrieve all transactions in a block |
+| Create Rule | Define new transfer restriction rules |
+| Get Rules | Retrieve compliance rules for asset |
+| Update Rule | Modify existing compliance requirements |
+| Delete Rule | Remove compliance restrictions |
+| Check Compliance | Validate if transfer meets requirements |
+| List Exemptions | View compliance exemptions |
+| Add Exemption | Grant compliance bypass for identity |
+| Remove Exemption | Revoke compliance exemption |
+
+### 6. Venue
+
+| Operation | Description |
+|-----------|-------------|
+| Create | Establish a new trading venue |
+| Get Details | Retrieve venue information and status |
+| Add Instruction | Create settlement instruction |
+| Execute Settlement | Process venue settlements |
+| List Instructions | View all venue instructions |
+| Update Venue | Modify venue configuration |
+| Authorize Parties | Grant venue access permissions |
+| Get Statistics | Retrieve venue trading metrics |
 
 ## Usage Examples
 
 ```javascript
-// Create a new identity with KYC verification
+// Create a new security token
 {
-  "node": "Polymesh",
-  "resource": "Identities",
-  "operation": "Create",
-  "parameters": {
-    "did": "0x01000000000000000000000000000000000000000000000000000000000000",
-    "primaryKey": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
-    "secondaryKeys": [],
-    "metadata": {
-      "investorType": "institutional",
-      "jurisdiction": "US"
+  "ticker": "ACME",
+  "assetName": "ACME Corp Security Token",
+  "totalSupply": "1000000",
+  "divisible": true,
+  "assetType": "EquityCommon",
+  "identifiers": [
+    {
+      "type": "ISIN",
+      "value": "US0123456789"
     }
-  }
+  ]
 }
 ```
 
 ```javascript
-// Issue a new security token
+// Register investor identity with KYC claim
 {
-  "node": "Polymesh",
-  "resource": "Assets",
-  "operation": "Create",
-  "parameters": {
-    "name": "ACME Corp Preferred Shares",
-    "ticker": "ACME-A",
-    "totalSupply": "1000000",
-    "divisible": true,
-    "assetType": "EquityPreferred",
-    "identifiers": [
-      {
-        "type": "ISIN",
-        "value": "US00123456789"
-      }
-    ]
-  }
+  "did": "0x1234567890abcdef",
+  "primaryKey": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
+  "claims": [
+    {
+      "type": "Accredited",
+      "jurisdiction": "US",
+      "expiry": "2024-12-31"
+    }
+  ]
 }
 ```
 
 ```javascript
-// Execute compliant asset transfer
+// Execute compliant token transfer
 {
-  "node": "Polymesh",
-  "resource": "Assets",
-  "operation": "Transfer",
-  "parameters": {
-    "ticker": "ACME-A",
-    "from": "0x01000000000000000000000000000000000000000000000000000000000001",
-    "to": "0x01000000000000000000000000000000000000000000000000000000000002",
-    "amount": "5000",
-    "memo": "Private placement transfer"
-  }
+  "from": "0xsender123",
+  "to": "0xreceiver456", 
+  "asset": "ACME",
+  "amount": "1000",
+  "memo": "Quarterly distribution",
+  "validateCompliance": true
 }
 ```
 
 ```javascript
-// Create atomic settlement between multiple parties
+// Set up compliance rule for accredited investors
 {
-  "node": "Polymesh",
-  "resource": "Settlements",
-  "operation": "Create",
-  "parameters": {
-    "venueId": "1",
-    "legs": [
-      {
-        "from": "0x01000000000000000000000000000000000000000000000000000000000001",
-        "to": "0x01000000000000000000000000000000000000000000000000000000000002",
-        "ticker": "ACME-A",
-        "amount": "1000"
-      },
-      {
-        "from": "0x01000000000000000000000000000000000000000000000000000000000002",
-        "to": "0x01000000000000000000000000000000000000000000000000000000000001",
-        "ticker": "POLYX",
-        "amount": "50000"
-      }
-    ]
-  }
+  "asset": "ACME",
+  "ruleType": "Identity",
+  "requirements": [
+    {
+      "claimType": "Accredited",
+      "jurisdiction": "US",
+      "required": true
+    }
+  ],
+  "exemptions": ["0xexemptIdentity789"]
 }
 ```
 
@@ -260,12 +211,12 @@ n8n start
 
 | Error | Description | Solution |
 |-------|-------------|----------|
-| Invalid DID Format | Provided Distributed Identity (DID) format is incorrect | Ensure DID follows Polymesh format: 32-byte hex string |
-| Insufficient Balance | Account lacks sufficient tokens for transaction | Check account balance and ensure adequate POLYX for fees |
-| Compliance Violation | Transfer blocked by compliance rules | Verify investor claims and asset transfer restrictions |
-| Identity Not Found | Specified identity does not exist on chain | Verify identity exists and DID is correct |
-| Unauthorized Operation | Account lacks permission for requested operation | Ensure account has required permissions or asset custody |
-| Network Connection Failed | Unable to connect to Polymesh network | Check network settings and API endpoint availability |
+| InvalidApiKey | API authentication failed | Verify API key and network settings |
+| InsufficientBalance | Not enough tokens for operation | Check account balance before transfer |
+| ComplianceViolation | Transfer blocked by compliance rules | Review and satisfy compliance requirements |
+| IdentityNotFound | Referenced identity does not exist | Verify identity DID or create identity first |
+| AssetNotFound | Referenced asset ticker not found | Check asset ticker spelling and existence |
+| UnauthorizedOperation | Insufficient permissions for action | Ensure proper key authorization and permissions |
 
 ## Development
 
@@ -310,5 +261,5 @@ Contributions are welcome! Please ensure:
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/Velocity-BPA/n8n-nodes-polymesh/issues)
-- **Polymesh Documentation**: [Polymesh Developer Portal](https://developers.polymesh.network/)
-- **Polymesh Community**: [Polymesh Discord](https://discord.gg/polymesh)
+- **Polymesh Documentation**: [docs.polymesh.network](https://docs.polymesh.network)
+- **Developer Resources**: [developers.polymesh.network](https://developers.polymesh.network)
