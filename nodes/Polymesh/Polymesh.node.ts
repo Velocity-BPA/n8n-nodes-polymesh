@@ -41,13 +41,36 @@ export class Polymesh implements INodeType {
       },
     ],
     properties: [
-      // Resource selector
       {
         displayName: 'Resource',
         name: 'resource',
         type: 'options',
         noDataExpression: true,
         options: [
+          {
+            name: 'Asset',
+            value: 'asset',
+          },
+          {
+            name: 'Identity',
+            value: 'identity',
+          },
+          {
+            name: 'Portfolio',
+            value: 'portfolio',
+          },
+          {
+            name: 'Transaction',
+            value: 'transaction',
+          },
+          {
+            name: 'Compliance',
+            value: 'compliance',
+          },
+          {
+            name: 'Venue',
+            value: 'venue',
+          },
           {
             name: 'Identities',
             value: 'identities',
@@ -81,9 +104,138 @@ export class Polymesh implements INodeType {
             value: 'transactions',
           }
         ],
-        default: 'identities',
+        default: 'asset',
       },
-      // Operation dropdowns per resource
+{
+  displayName: 'Operation',
+  name: 'operation',
+  type: 'options',
+  noDataExpression: true,
+  displayOptions: { show: { resource: ['asset'] } },
+  options: [
+    { name: 'Get Asset', value: 'getAsset', description: 'Retrieve asset details by ticker', action: 'Get asset details' },
+    { name: 'Get All Assets', value: 'getAllAssets', description: 'List all assets with pagination', action: 'Get all assets' },
+    { name: 'Create Asset', value: 'createAsset', description: 'Create a new security token', action: 'Create a new asset' },
+    { name: 'Update Asset', value: 'updateAsset', description: 'Update asset properties', action: 'Update asset properties' },
+    { name: 'Freeze Asset', value: 'freezeAsset', description: 'Freeze an asset', action: 'Freeze an asset' },
+    { name: 'Unfreeze Asset', value: 'unfreezeAsset', description: 'Unfreeze an asset', action: 'Unfreeze an asset' },
+  ],
+  default: 'getAsset',
+},
+{
+  displayName: 'Operation',
+  name: 'operation',
+  type: 'options',
+  noDataExpression: true,
+  displayOptions: { show: { resource: ['identity'] } },
+  options: [
+    { name: 'Get Identity', value: 'getIdentity', description: 'Retrieve identity details by DID', action: 'Get identity details' },
+    { name: 'Get All Identities', value: 'getAllIdentities', description: 'List identities with filters', action: 'Get all identities' },
+    { name: 'Create Identity', value: 'createIdentity', description: 'Register new identity', action: 'Create new identity' },
+    { name: 'Update Identity CDD', value: 'updateIdentityCdd', description: 'Update CDD claim for identity', action: 'Update identity CDD' },
+    { name: 'Revoke Identity CDD', value: 'revokeIdentityCdd', description: 'Revoke CDD claim for identity', action: 'Revoke identity CDD' },
+    { name: 'Get Identity Portfolios', value: 'getIdentityPortfolios', description: 'Get portfolios for an identity', action: 'Get identity portfolios' },
+  ],
+  default: 'getIdentity',
+},
+{
+  displayName: 'Operation',
+  name: 'operation',
+  type: 'options',
+  noDataExpression: true,
+  displayOptions: { show: { resource: ['portfolio'] } },
+  options: [
+    { name: 'Get Portfolio', value: 'getPortfolio', description: 'Get portfolio details', action: 'Get portfolio' },
+    { name: 'Get Portfolios By Identity', value: 'getPortfoliosByIdentity', description: 'List portfolios for identity', action: 'Get portfolios by identity' },
+    { name: 'Create Portfolio', value: 'createPortfolio', description: 'Create new portfolio', action: 'Create portfolio' },
+    { name: 'Update Portfolio', value: 'updatePortfolio', description: 'Update portfolio name', action: 'Update portfolio' },
+    { name: 'Delete Portfolio', value: 'deletePortfolio', description: 'Delete portfolio', action: 'Delete portfolio' },
+    { name: 'Get Portfolio Balances', value: 'getPortfolioBalances', description: 'Get asset balances', action: 'Get portfolio balances' },
+  ],
+  default: 'getPortfolio',
+},
+{
+	displayName: 'Operation',
+	name: 'operation',
+	type: 'options',
+	noDataExpression: true,
+	displayOptions: { show: { resource: ['transaction'] } },
+	options: [
+		{ name: 'Create Settlement', value: 'createSettlement', description: 'Create settlement instruction', action: 'Create settlement' },
+		{ name: 'Get Settlement', value: 'getSettlement', description: 'Get settlement details', action: 'Get settlement' },
+		{ name: 'Get All Settlements', value: 'getAllSettlements', description: 'List settlements with filters', action: 'Get all settlements' },
+		{ name: 'Affirm Settlement', value: 'affirmSettlement', description: 'Affirm settlement leg', action: 'Affirm settlement' },
+		{ name: 'Reject Settlement', value: 'rejectSettlement', description: 'Reject settlement instruction', action: 'Reject settlement' },
+		{ name: 'Execute Settlement', value: 'executeSettlement', description: 'Execute settlement', action: 'Execute settlement' },
+	],
+	default: 'createSettlement',
+},
+{
+	displayName: 'Operation',
+	name: 'operation',
+	type: 'options',
+	noDataExpression: true,
+	displayOptions: {
+		show: {
+			resource: ['compliance'],
+		},
+	},
+	options: [
+		{
+			name: 'Get Compliance Requirements',
+			value: 'getComplianceRequirements',
+			description: 'Get transfer requirements for a ticker',
+			action: 'Get compliance requirements',
+		},
+		{
+			name: 'Create Compliance Requirement',
+			value: 'createComplianceRequirement',
+			description: 'Add compliance rule for a ticker',
+			action: 'Create compliance requirement',
+		},
+		{
+			name: 'Update Compliance Requirement',
+			value: 'updateComplianceRequirement',
+			description: 'Update compliance rule for a ticker',
+			action: 'Update compliance requirement',
+		},
+		{
+			name: 'Delete Compliance Requirement',
+			value: 'deleteComplianceRequirement',
+			description: 'Remove compliance rule for a ticker',
+			action: 'Delete compliance requirement',
+		},
+		{
+			name: 'Pause Compliance',
+			value: 'pauseCompliance',
+			description: 'Pause compliance checks for a ticker',
+			action: 'Pause compliance',
+		},
+		{
+			name: 'Resume Compliance',
+			value: 'resumeCompliance',
+			description: 'Resume compliance checks for a ticker',
+			action: 'Resume compliance',
+		},
+	],
+	default: 'getComplianceRequirements',
+},
+{
+  displayName: 'Operation',
+  name: 'operation',
+  type: 'options',
+  noDataExpression: true,
+  displayOptions: { show: { resource: ['venue'] } },
+  options: [
+    { name: 'Get Venue', value: 'getVenue', description: 'Get venue details by ID', action: 'Get venue details' },
+    { name: 'Get All Venues', value: 'getAllVenues', description: 'List all settlement venues', action: 'Get all venues' },
+    { name: 'Create Venue', value: 'createVenue', description: 'Create new settlement venue', action: 'Create a venue' },
+    { name: 'Update Venue', value: 'updateVenue', description: 'Update venue details', action: 'Update a venue' },
+    { name: 'Get Venue Instructions', value: 'getVenueInstructions', description: 'Get venue settlement instructions', action: 'Get venue instructions' },
+    { name: 'Allow Instruction Types', value: 'allowInstructionTypes', description: 'Configure allowed instruction types for venue', action: 'Allow instruction types' }
+  ],
+  default: 'getVenue',
+},
 {
   displayName: 'Operation',
   name: 'operation',
@@ -400,7 +552,488 @@ export class Polymesh implements INodeType {
   ],
   default: 'getTransaction',
 },
-      // Parameter definitions
+{
+  displayName: 'Ticker',
+  name: 'ticker',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['asset'], operation: ['getAsset', 'updateAsset', 'freezeAsset', 'unfreezeAsset'] } },
+  default: '',
+  description: 'The ticker symbol of the asset',
+},
+{
+  displayName: 'Limit',
+  name: 'limit',
+  type: 'number',
+  displayOptions: { show: { resource: ['asset'], operation: ['getAllAssets'] } },
+  default: 10,
+  description: 'Maximum number of assets to return',
+},
+{
+  displayName: 'Offset',
+  name: 'offset',
+  type: 'number',
+  displayOptions: { show: { resource: ['asset'], operation: ['getAllAssets'] } },
+  default: 0,
+  description: 'Number of assets to skip',
+},
+{
+  displayName: 'Name',
+  name: 'name',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['asset'], operation: ['createAsset'] } },
+  default: '',
+  description: 'The name of the asset',
+},
+{
+  displayName: 'Ticker',
+  name: 'ticker',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['asset'], operation: ['createAsset'] } },
+  default: '',
+  description: 'The ticker symbol of the asset',
+},
+{
+  displayName: 'Divisible',
+  name: 'divisible',
+  type: 'boolean',
+  displayOptions: { show: { resource: ['asset'], operation: ['createAsset'] } },
+  default: true,
+  description: 'Whether the asset is divisible',
+},
+{
+  displayName: 'Asset Type',
+  name: 'assetType',
+  type: 'options',
+  displayOptions: { show: { resource: ['asset'], operation: ['createAsset'] } },
+  options: [
+    { name: 'Equity Token', value: 'EquityCommon' },
+    { name: 'Security Token', value: 'SecurityToken' },
+    { name: 'Utility Token', value: 'UtilityToken' },
+    { name: 'Investment Fund', value: 'InvestmentFund' },
+  ],
+  default: 'SecurityToken',
+  description: 'The type of asset to create',
+},
+{
+  displayName: 'Name',
+  name: 'name',
+  type: 'string',
+  displayOptions: { show: { resource: ['asset'], operation: ['updateAsset'] } },
+  default: '',
+  description: 'The updated name of the asset',
+},
+{
+  displayName: 'Funding Round',
+  name: 'fundingRound',
+  type: 'string',
+  displayOptions: { show: { resource: ['asset'], operation: ['updateAsset'] } },
+  default: '',
+  description: 'The funding round identifier',
+},
+{
+  displayName: 'DID',
+  name: 'did',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['identity'], operation: ['getIdentity'] } },
+  default: '',
+  description: 'The decentralized identifier (DID) of the identity',
+},
+{
+  displayName: 'Limit',
+  name: 'limit',
+  type: 'number',
+  displayOptions: { show: { resource: ['identity'], operation: ['getAllIdentities'] } },
+  default: 100,
+  description: 'Maximum number of identities to return',
+},
+{
+  displayName: 'Offset',
+  name: 'offset',
+  type: 'number',
+  displayOptions: { show: { resource: ['identity'], operation: ['getAllIdentities'] } },
+  default: 0,
+  description: 'Number of identities to skip',
+},
+{
+  displayName: 'Has Valid CDD',
+  name: 'hasValidCdd',
+  type: 'boolean',
+  displayOptions: { show: { resource: ['identity'], operation: ['getAllIdentities'] } },
+  default: false,
+  description: 'Filter identities by valid CDD status',
+},
+{
+  displayName: 'Target Account',
+  name: 'targetAccount',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['identity'], operation: ['createIdentity'] } },
+  default: '',
+  description: 'The target account address for the new identity',
+},
+{
+  displayName: 'Expiry',
+  name: 'expiry',
+  type: 'string',
+  displayOptions: { show: { resource: ['identity'], operation: ['createIdentity', 'updateIdentityCdd'] } },
+  default: '',
+  description: 'Expiry date for the identity or CDD claim (ISO 8601 format)',
+},
+{
+  displayName: 'DID',
+  name: 'did',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['identity'], operation: ['updateIdentityCdd'] } },
+  default: '',
+  description: 'The decentralized identifier (DID) of the identity',
+},
+{
+  displayName: 'DID',
+  name: 'did',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['identity'], operation: ['revokeIdentityCdd'] } },
+  default: '',
+  description: 'The decentralized identifier (DID) of the identity',
+},
+{
+  displayName: 'DID',
+  name: 'did',
+  type: 'string',
+  required: true,
+  displayOptions: { show: { resource: ['identity'], operation: ['getIdentityPortfolios'] } },
+  default: '',
+  description: 'The decentralized identifier (DID) of the identity',
+},
+{
+  displayName: 'DID',
+  name: 'did',
+  type: 'string',
+  required: true,
+  displayOptions: {
+    show: {
+      resource: ['portfolio'],
+      operation: ['getPortfolio', 'getPortfoliosByIdentity', 'createPortfolio', 'updatePortfolio', 'deletePortfolio', 'getPortfolioBalances'],
+    },
+  },
+  default: '',
+  description: 'The decentralized identifier',
+},
+{
+  displayName: 'Portfolio ID',
+  name: 'id',
+  type: 'string',
+  required: true,
+  displayOptions: {
+    show: {
+      resource: ['portfolio'],
+      operation: ['getPortfolio', 'updatePortfolio', 'deletePortfolio', 'getPortfolioBalances'],
+    },
+  },
+  default: '',
+  description: 'The portfolio identifier',
+},
+{
+  displayName: 'Portfolio Name',
+  name: 'name',
+  type: 'string',
+  required: true,
+  displayOptions: {
+    show: {
+      resource: ['portfolio'],
+      operation: ['createPortfolio', 'updatePortfolio'],
+    },
+  },
+  default: '',
+  description: 'The name of the portfolio',
+},
+{
+	displayName: 'Legs',
+	name: 'legs',
+	type: 'json',
+	required: true,
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['createSettlement'],
+		},
+	},
+	default: '',
+	description: 'Settlement legs containing asset transfers',
+},
+{
+	displayName: 'Venue ID',
+	name: 'venueId',
+	type: 'string',
+	required: true,
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['createSettlement'],
+		},
+	},
+	default: '',
+	description: 'The venue ID for the settlement',
+},
+{
+	displayName: 'Type',
+	name: 'type',
+	type: 'options',
+	required: true,
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['createSettlement'],
+		},
+	},
+	options: [
+		{ name: 'SettleOnAffirmation', value: 'SettleOnAffirmation' },
+		{ name: 'SettleOnBlock', value: 'SettleOnBlock' },
+		{ name: 'SettleManual', value: 'SettleManual' },
+	],
+	default: 'SettleOnAffirmation',
+	description: 'Settlement type',
+},
+{
+	displayName: 'Settlement ID',
+	name: 'id',
+	type: 'string',
+	required: true,
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['getSettlement', 'affirmSettlement', 'rejectSettlement', 'executeSettlement'],
+		},
+	},
+	default: '',
+	description: 'The settlement instruction ID',
+},
+{
+	displayName: 'Status',
+	name: 'status',
+	type: 'options',
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['getAllSettlements'],
+		},
+	},
+	options: [
+		{ name: 'Pending', value: 'Pending' },
+		{ name: 'Failed', value: 'Failed' },
+		{ name: 'Rejected', value: 'Rejected' },
+		{ name: 'Executed', value: 'Executed' },
+	],
+	default: 'Pending',
+	description: 'Filter by settlement status',
+},
+{
+	displayName: 'Limit',
+	name: 'limit',
+	type: 'number',
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['getAllSettlements'],
+		},
+	},
+	default: 50,
+	description: 'Maximum number of results to return',
+},
+{
+	displayName: 'Offset',
+	name: 'offset',
+	type: 'number',
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['getAllSettlements'],
+		},
+	},
+	default: 0,
+	description: 'Number of results to skip',
+},
+{
+	displayName: 'Portfolios',
+	name: 'portfolios',
+	type: 'json',
+	required: true,
+	displayOptions: {
+		show: {
+			resource: ['transaction'],
+			operation: ['affirmSettlement'],
+		},
+	},
+	default: '',
+	description: 'Portfolios to use for affirmation',
+},
+{
+	displayName: 'Ticker',
+	name: 'ticker',
+	type: 'string',
+	required: true,
+	displayOptions: {
+		show: {
+			resource: ['compliance'],
+			operation: ['getComplianceRequirements', 'createComplianceRequirement', 'updateComplianceRequirement', 'deleteComplianceRequirement', 'pauseCompliance', 'resumeCompliance'],
+		},
+	},
+	default: '',
+	description: 'The ticker symbol of the security token',
+},
+{
+	displayName: 'Requirement ID',
+	name: 'id',
+	type: 'string',
+	required: true,
+	displayOptions: {
+		show: {
+			resource: ['compliance'],
+			operation: ['updateComplianceRequirement', 'deleteComplianceRequirement'],
+		},
+	},
+	default: '',
+	description: 'The ID of the compliance requirement',
+},
+{
+	displayName: 'Sender Conditions',
+	name: 'senderConditions',
+	type: 'json',
+	displayOptions: {
+		show: {
+			resource: ['compliance'],
+			operation: ['createComplianceRequirement', 'updateComplianceRequirement'],
+		},
+	},
+	default: '{}',
+	description: 'JSON object defining sender compliance conditions',
+},
+{
+	displayName: 'Receiver Conditions',
+	name: 'receiverConditions',
+	type: 'json',
+	displayOptions: {
+		show: {
+			resource: ['compliance'],
+			operation: ['createComplianceRequirement', 'updateComplianceRequirement'],
+		},
+	},
+	default: '{}',
+	description: 'JSON object defining receiver compliance conditions',
+},
+{
+  displayName: 'Venue ID',
+  name: 'venueId',
+  type: 'string',
+  required: true,
+  displayOptions: {
+    show: {
+      resource: ['venue'],
+      operation: ['getVenue', 'updateVenue', 'getVenueInstructions', 'allowInstructionTypes']
+    }
+  },
+  default: '',
+  description: 'The unique identifier of the venue'
+},
+{
+  displayName: 'Limit',
+  name: 'limit',
+  type: 'number',
+  displayOptions: {
+    show: {
+      resource: ['venue'],
+      operation: ['getAllVenues']
+    }
+  },
+  default: 50,
+  description: 'Maximum number of venues to return'
+},
+{
+  displayName: 'Offset',
+  name: 'offset',
+  type: 'number',
+  displayOptions: {
+    show: {
+      resource: ['venue'],
+      operation: ['getAllVenues']
+    }
+  },
+  default: 0,
+  description: 'Number of venues to skip'
+},
+{
+  displayName: 'Details',
+  name: 'details',
+  type: 'string',
+  required: true,
+  displayOptions: {
+    show: {
+      resource: ['venue'],
+      operation: ['createVenue', 'updateVenue']
+    }
+  },
+  default: '',
+  description: 'Venue details description'
+},
+{
+  displayName: 'Type',
+  name: 'type',
+  type: 'options',
+  options: [
+    { name: 'Other', value: 'Other' },
+    { name: 'Distribution', value: 'Distribution' },
+    { name: 'Sto', value: 'Sto' },
+    { name: 'Exchange', value: 'Exchange' }
+  ],
+  required: true,
+  displayOptions: {
+    show: {
+      resource: ['venue'],
+      operation: ['createVenue']
+    }
+  },
+  default: 'Other',
+  description: 'Type of the venue'
+},
+{
+  displayName: 'Status',
+  name: 'status',
+  type: 'options',
+  options: [
+    { name: 'Unknown', value: 'Unknown' },
+    { name: 'Pending', value: 'Pending' },
+    { name: 'Success', value: 'Success' },
+    { name: 'Failed', value: 'Failed' },
+    { name: 'Rejected', value: 'Rejected' }
+  ],
+  displayOptions: {
+    show: {
+      resource: ['venue'],
+      operation: ['getVenueInstructions']
+    }
+  },
+  default: '',
+  description: 'Filter instructions by status'
+},
+{
+  displayName: 'Instruction Types',
+  name: 'types',
+  type: 'string',
+  required: true,
+  displayOptions: {
+    show: {
+      resource: ['venue'],
+      operation: ['allowInstructionTypes']
+    }
+  },
+  default: '',
+  description: 'Comma-separated list of instruction types to allow'
+},
 {
   displayName: 'DID',
   name: 'did',
@@ -1187,6 +1820,18 @@ export class Polymesh implements INodeType {
     const resource = this.getNodeParameter('resource', 0) as string;
 
     switch (resource) {
+      case 'asset':
+        return [await executeAssetOperations.call(this, items)];
+      case 'identity':
+        return [await executeIdentityOperations.call(this, items)];
+      case 'portfolio':
+        return [await executePortfolioOperations.call(this, items)];
+      case 'transaction':
+        return [await executeTransactionOperations.call(this, items)];
+      case 'compliance':
+        return [await executeComplianceOperations.call(this, items)];
+      case 'venue':
+        return [await executeVenueOperations.call(this, items)];
       case 'identities':
         return [await executeIdentitiesOperations.call(this, items)];
       case 'assets':
@@ -1213,145 +1858,7 @@ export class Polymesh implements INodeType {
 // Resource Handler Functions
 // ============================================================
 
-async function executeIdentitiesOperations(
-  this: IExecuteFunctions,
-  items: INodeExecutionData[],
-): Promise<INodeExecutionData[]> {
-  const returnData: INodeExecutionData[] = [];
-  const operation = this.getNodeParameter('operation', 0) as string;
-  const credentials = await this.getCredentials('polymeshApi') as any;
-
-  for (let i = 0; i < items.length; i++) {
-    try {
-      let result: any;
-      
-      switch (operation) {
-        case 'getIdentity': {
-          const did = this.getNodeParameter('did', i) as string;
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/identities/${did}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'listIdentities': {
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
-          
-          const queryParams: any = {};
-          if (size) queryParams.size = size;
-          if (start) queryParams.start = start;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/identities`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            qs: queryParams,
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getIdentityPortfolios': {
-          const did = this.getNodeParameter('did', i) as string;
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/identities/${did}/portfolios`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getIdentityClaims': {
-          const did = this.getNodeParameter('did', i) as string;
-          const claimTypes = this.getNodeParameter('claimTypes', i) as string;
-          
-          const queryParams: any = {};
-          if (claimTypes) {
-            queryParams.claimTypes = claimTypes;
-          }
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/identities/${did}/claims`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            qs: queryParams,
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getIdentityInstructions': {
-          const did = this.getNodeParameter('did', i) as string;
-          const status = this.getNodeParameter('status', i) as string;
-          
-          const queryParams: any = {};
-          if (status) {
-            queryParams.status = status;
-          }
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/identities/${did}/instructions`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            qs: queryParams,
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        default:
-          throw new NodeOperationError(this.getNode(), `Unknown operation: ${operation}`);
-      }
-      
-      returnData.push({ 
-        json: result, 
-        pairedItem: { item: i } 
-      });
-      
-    } catch (error: any) {
-      if (this.continueOnFail()) {
-        returnData.push({ 
-          json: { error: error.message }, 
-          pairedItem: { item: i } 
-        });
-      } else {
-        if (error.httpCode) {
-          throw new NodeApiError(this.getNode(), error);
-        }
-        throw new NodeOperationError(this.getNode(), error.message);
-      }
-    }
-  }
-  
-  return returnData;
-}
-
-async function executeAssetsOperations(
+async function executeAssetOperations(
   this: IExecuteFunctions,
   items: INodeExecutionData[],
 ): Promise<INodeExecutionData[]> {
@@ -1366,619 +1873,113 @@ async function executeAssetsOperations(
       switch (operation) {
         case 'getAsset': {
           const ticker = this.getNodeParameter('ticker', i) as string;
-          
           const options: any = {
             method: 'GET',
             url: `${credentials.baseUrl}/assets/${ticker}`,
             headers: {
-              'Accept': 'application/json',
-              'X-API-Key': credentials.apiKey,
+              'Authorization': `Bearer ${credentials.apiKey}`,
+              'Content-Type': 'application/json',
             },
             json: true,
           };
-          
           result = await this.helpers.httpRequest(options) as any;
           break;
         }
 
-        case 'listAssets': {
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
-          const owner = this.getNodeParameter('owner', i) as string;
-          
-          const queryParams = new URLSearchParams();
-          if (size) queryParams.append('size', size.toString());
-          if (start) queryParams.append('start', start);
-          if (owner) queryParams.append('owner', owner);
-          
+        case 'getAllAssets': {
+          const limit = this.getNodeParameter('limit', i) as number;
+          const offset = this.getNodeParameter('offset', i) as number;
           const options: any = {
             method: 'GET',
-            url: `${credentials.baseUrl}/assets${queryParams.toString() ? '?' + queryParams.toString() : ''}`,
+            url: `${credentials.baseUrl}/assets`,
             headers: {
-              'Accept': 'application/json',
-              'X-API-Key': credentials.apiKey,
+              'Authorization': `Bearer ${credentials.apiKey}`,
+              'Content-Type': 'application/json',
+            },
+            qs: {
+              limit,
+              offset,
             },
             json: true,
           };
-          
           result = await this.helpers.httpRequest(options) as any;
           break;
         }
 
-        case 'getAssetHolders': {
+        case 'createAsset': {
+          const name = this.getNodeParameter('name', i) as string;
           const ticker = this.getNodeParameter('ticker', i) as string;
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
-          
-          const queryParams = new URLSearchParams();
-          if (size) queryParams.append('size', size.toString());
-          if (start) queryParams.append('start', start);
+          const divisible = this.getNodeParameter('divisible', i) as boolean;
+          const assetType = this.getNodeParameter('assetType', i) as string;
           
           const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/assets/${ticker}/holders${queryParams.toString() ? '?' + queryParams.toString() : ''}`,
+            method: 'POST',
+            url: `${credentials.baseUrl}/assets/create`,
             headers: {
-              'Accept': 'application/json',
-              'X-API-Key': credentials.apiKey,
+              'Authorization': `Bearer ${credentials.apiKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: {
+              name,
+              ticker,
+              divisible,
+              assetType,
             },
             json: true,
           };
-          
           result = await this.helpers.httpRequest(options) as any;
           break;
         }
 
-        case 'getAssetTransactions': {
+        case 'updateAsset': {
           const ticker = this.getNodeParameter('ticker', i) as string;
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
+          const name = this.getNodeParameter('name', i) as string;
+          const fundingRound = this.getNodeParameter('fundingRound', i) as string;
           
-          const queryParams = new URLSearchParams();
-          if (size) queryParams.append('size', size.toString());
-          if (start) queryParams.append('start', start);
+          const body: any = {};
+          if (name) body.name = name;
+          if (fundingRound) body.fundingRound = fundingRound;
           
           const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/assets/${ticker}/transactions${queryParams.toString() ? '?' + queryParams.toString() : ''}`,
+            method: 'PATCH',
+            url: `${credentials.baseUrl}/assets/${ticker}`,
             headers: {
-              'Accept': 'application/json',
-              'X-API-Key': credentials.apiKey,
+              'Authorization': `Bearer ${credentials.apiKey}`,
+              'Content-Type': 'application/json',
             },
+            body,
             json: true,
           };
-          
           result = await this.helpers.httpRequest(options) as any;
           break;
         }
 
-        case 'getAssetDocuments': {
+        case 'freezeAsset': {
           const ticker = this.getNodeParameter('ticker', i) as string;
-          
           const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/assets/${ticker}/documents`,
+            method: 'POST',
+            url: `${credentials.baseUrl}/assets/${ticker}/freeze`,
             headers: {
-              'Accept': 'application/json',
-              'X-API-Key': credentials.apiKey,
+              'Authorization': `Bearer ${credentials.apiKey}`,
+              'Content-Type': 'application/json',
             },
             json: true,
           };
-          
           result = await this.helpers.httpRequest(options) as any;
           break;
         }
 
-        case 'getComplianceRequirements': {
+        case 'unfreezeAsset': {
           const ticker = this.getNodeParameter('ticker', i) as string;
-          
           const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/assets/${ticker}/compliance`,
-            headers: {
-              'Accept': 'application/json',
-              'X-API-Key': credentials.apiKey,
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        default:
-          throw new NodeOperationError(this.getNode(), `Unknown operation: ${operation}`);
-      }
-
-      returnData.push({ json: result, pairedItem: { item: i } });
-    } catch (error: any) {
-      if (this.continueOnFail()) {
-        returnData.push({ 
-          json: { error: error.message }, 
-          pairedItem: { item: i } 
-        });
-      } else {
-        if (error.httpCode) {
-          throw new NodeApiError(this.getNode(), error);
-        }
-        throw new NodeOperationError(this.getNode(), error.message);
-      }
-    }
-  }
-
-  return returnData;
-}
-
-async function executePortfoliosOperations(
-  this: IExecuteFunctions,
-  items: INodeExecutionData[],
-): Promise<INodeExecutionData[]> {
-  const returnData: INodeExecutionData[] = [];
-  const operation = this.getNodeParameter('operation', 0) as string;
-  const credentials = await this.getCredentials('polymeshApi') as any;
-
-  for (let i = 0; i < items.length; i++) {
-    try {
-      let result: any;
-
-      switch (operation) {
-        case 'getPortfolio': {
-          const did = this.getNodeParameter('did', i) as string;
-          const portfolioId = this.getNodeParameter('portfolioId', i) as string;
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/portfolios/${did}/${portfolioId}`,
+            method: 'POST',
+            url: `${credentials.baseUrl}/assets/${ticker}/unfreeze`,
             headers: {
               'Authorization': `Bearer ${credentials.apiKey}`,
               'Content-Type': 'application/json',
             },
             json: true,
           };
-
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'getPortfoliosByDid': {
-          const did = this.getNodeParameter('did', i) as string;
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/portfolios/${did}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'getPortfolioMovements': {
-          const did = this.getNodeParameter('did', i) as string;
-          const portfolioId = this.getNodeParameter('portfolioId', i) as string;
-          const address = this.getNodeParameter('address', i, '') as string;
-          const ticker = this.getNodeParameter('ticker', i, '') as string;
-
-          const queryParams: string[] = [];
-          if (address) {
-            queryParams.push(`address=${encodeURIComponent(address)}`);
-          }
-          if (ticker) {
-            queryParams.push(`ticker=${encodeURIComponent(ticker)}`);
-          }
-
-          const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/portfolios/${did}/${portfolioId}/movements${queryString}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'getPortfolioBalances': {
-          const did = this.getNodeParameter('did', i) as string;
-          const portfolioId = this.getNodeParameter('portfolioId', i) as string;
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/portfolios/${did}/${portfolioId}/balances`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        default:
-          throw new NodeOperationError(
-            this.getNode(),
-            `The operation "${operation}" is not supported!`,
-          );
-      }
-
-      returnData.push({
-        json: result,
-        pairedItem: { item: i },
-      });
-
-    } catch (error: any) {
-      if (this.continueOnFail()) {
-        returnData.push({
-          json: { 
-            error: error.message,
-            operation,
-            item: i,
-          },
-          pairedItem: { item: i },
-        });
-      } else {
-        if (error.httpCode) {
-          throw new NodeApiError(this.getNode(), error);
-        }
-        throw new NodeOperationError(this.getNode(), error.message);
-      }
-    }
-  }
-
-  return returnData;
-}
-
-async function executeSettlementsOperations(
-  this: IExecuteFunctions,
-  items: INodeExecutionData[],
-): Promise<INodeExecutionData[]> {
-  const returnData: INodeExecutionData[] = [];
-  const operation = this.getNodeParameter('operation', 0) as string;
-  const credentials = await this.getCredentials('polymeshApi') as any;
-
-  for (let i = 0; i < items.length; i++) {
-    try {
-      let result: any;
-      
-      switch (operation) {
-        case 'getSettlement': {
-          const id = this.getNodeParameter('id', i) as string;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/settlements/${id}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'listSettlements': {
-          const status = this.getNodeParameter('status', i) as string;
-          const involvedParty = this.getNodeParameter('involvedParty', i) as string;
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
-          
-          const queryParams: any = {};
-          if (status) queryParams.status = status;
-          if (involvedParty) queryParams.involvedParty = involvedParty;
-          if (size) queryParams.size = size.toString();
-          if (start) queryParams.start = start;
-          
-          const queryString = Object.keys(queryParams).length > 0 
-            ? '?' + new URLSearchParams(queryParams).toString()
-            : '';
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/settlements${queryString}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getSettlementLegs': {
-          const id = this.getNodeParameter('id', i) as string;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/settlements/${id}/legs`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getSettlementAffirmations': {
-          const id = this.getNodeParameter('id', i) as string;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/settlements/${id}/affirmations`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        default:
-          throw new NodeOperationError(this.getNode(), `Unknown operation: ${operation}`);
-      }
-      
-      returnData.push({ json: result, pairedItem: { item: i } });
-      
-    } catch (error: any) {
-      if (error.httpCode) {
-        throw new NodeApiError(this.getNode(), error);
-      }
-      
-      if (this.continueOnFail()) {
-        returnData.push({ 
-          json: { error: error.message }, 
-          pairedItem: { item: i } 
-        });
-      } else {
-        throw new NodeOperationError(this.getNode(), error.message);
-      }
-    }
-  }
-  
-  return returnData;
-}
-
-async function executeInstructionsOperations(
-  this: IExecuteFunctions,
-  items: INodeExecutionData[],
-): Promise<INodeExecutionData[]> {
-  const returnData: INodeExecutionData[] = [];
-  const operation = this.getNodeParameter('operation', 0) as string;
-  const credentials = await this.getCredentials('polymeshApi') as any;
-
-  for (let i = 0; i < items.length; i++) {
-    try {
-      let result: any;
-      
-      switch (operation) {
-        case 'getInstruction': {
-          const instructionId = this.getNodeParameter('instructionId', i) as string;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/instructions/${instructionId}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'listInstructions': {
-          const status = this.getNodeParameter('status', i) as string;
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
-          
-          const queryParams: string[] = [];
-          if (status) queryParams.push(`status=${encodeURIComponent(status)}`);
-          if (size) queryParams.push(`size=${size}`);
-          if (start) queryParams.push(`start=${encodeURIComponent(start)}`);
-          
-          const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/instructions${queryString}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getInstructionLegs': {
-          const instructionId = this.getNodeParameter('instructionId', i) as string;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/instructions/${instructionId}/legs`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getInstructionAffirmations': {
-          const instructionId = this.getNodeParameter('instructionId', i) as string;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/instructions/${instructionId}/affirmations`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getInstructionEvents': {
-          const instructionId = this.getNodeParameter('instructionId', i) as string;
-          
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/instructions/${instructionId}/events`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        default:
-          throw new NodeOperationError(this.getNode(), `Unknown operation: ${operation}`);
-      }
-      
-      returnData.push({ json: result, pairedItem: { item: i } });
-      
-    } catch (error: any) {
-      if (this.continueOnFail()) {
-        returnData.push({ 
-          json: { error: error.message }, 
-          pairedItem: { item: i } 
-        });
-      } else {
-        if (error.httpCode) {
-          throw new NodeApiError(this.getNode(), error);
-        } else {
-          throw new NodeOperationError(this.getNode(), error.message);
-        }
-      }
-    }
-  }
-  
-  return returnData;
-}
-
-async function executeClaimsOperations(
-  this: IExecuteFunctions,
-  items: INodeExecutionData[],
-): Promise<INodeExecutionData[]> {
-  const returnData: INodeExecutionData[] = [];
-  const operation = this.getNodeParameter('operation', 0) as string;
-  const credentials = await this.getCredentials('polymeshApi') as any;
-
-  for (let i = 0; i < items.length; i++) {
-    try {
-      let result: any;
-
-      switch (operation) {
-        case 'listClaims': {
-          const target = this.getNodeParameter('target', i) as string;
-          const issuer = this.getNodeParameter('issuer', i) as string;
-          const claimTypes = this.getNodeParameter('claimTypes', i) as string;
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
-
-          const queryParams: any = {};
-          if (target) queryParams.target = target;
-          if (issuer) queryParams.issuer = issuer;
-          if (claimTypes) queryParams.claimTypes = claimTypes;
-          if (size) queryParams.size = size;
-          if (start) queryParams.start = start;
-
-          const queryString = new URLSearchParams(queryParams).toString();
-          const url = `${credentials.baseUrl}/claims${queryString ? '?' + queryString : ''}`;
-
-          const options: any = {
-            method: 'GET',
-            url,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'getClaimsByTarget': {
-          const targetIdentity = this.getNodeParameter('targetIdentity', i) as string;
-          const claimTypes = this.getNodeParameter('claimTypes', i) as string;
-          const includeExpired = this.getNodeParameter('includeExpired', i) as boolean;
-
-          const queryParams: any = {};
-          if (claimTypes) queryParams.claimTypes = claimTypes;
-          if (includeExpired) queryParams.includeExpired = includeExpired;
-
-          const queryString = new URLSearchParams(queryParams).toString();
-          const url = `${credentials.baseUrl}/claims/${targetIdentity}${queryString ? '?' + queryString : ''}`;
-
-          const options: any = {
-            method: 'GET',
-            url,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'getClaimIssuers': {
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as string;
-
-          const queryParams: any = {};
-          if (size) queryParams.size = size;
-          if (start) queryParams.start = start;
-
-          const queryString = new URLSearchParams(queryParams).toString();
-          const url = `${credentials.baseUrl}/claims/issuers${queryString ? '?' + queryString : ''}`;
-
-          const options: any = {
-            method: 'GET',
-            url,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-
           result = await this.helpers.httpRequest(options) as any;
           break;
         }
@@ -1992,10 +1993,7 @@ async function executeClaimsOperations(
       if (this.continueOnFail()) {
         returnData.push({ json: { error: error.message }, pairedItem: { item: i } });
       } else {
-        if (error.httpCode) {
-          throw new NodeApiError(this.getNode(), error);
-        }
-        throw new NodeOperationError(this.getNode(), error.message);
+        throw error;
       }
     }
   }
@@ -2003,7 +2001,7 @@ async function executeClaimsOperations(
   return returnData;
 }
 
-async function executeBlocksOperations(
+async function executeIdentityOperations(
   this: IExecuteFunctions,
   items: INodeExecutionData[],
 ): Promise<INodeExecutionData[]> {
@@ -2016,222 +2014,11 @@ async function executeBlocksOperations(
       let result: any;
 
       switch (operation) {
-        case 'getLatestBlock': {
+        case 'getIdentity': {
+          const did = this.getNodeParameter('did', i) as string;
           const options: any = {
             method: 'GET',
-            url: `${credentials.baseUrl}/blocks/latest`,
+            url: `${credentials.baseUrl}/identities/${did}`,
             headers: {
               'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'getBlock': {
-          const blockId = this.getNodeParameter('blockId', i) as string;
-          
-          if (!blockId) {
-            throw new NodeOperationError(this.getNode(), 'Block ID is required for getBlock operation');
-          }
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/blocks/${blockId}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'listBlocks': {
-          const size = this.getNodeParameter('size', i, 25) as number;
-          const start = this.getNodeParameter('start', i, '') as string;
-
-          const queryParams: string[] = [];
-          queryParams.push(`size=${size}`);
-          
-          if (start) {
-            queryParams.push(`start=${start}`);
-          }
-
-          const queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/blocks${queryString}`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        case 'getBlockTransactions': {
-          const blockId = this.getNodeParameter('blockId', i) as string;
-          
-          if (!blockId) {
-            throw new NodeOperationError(this.getNode(), 'Block ID is required for getBlockTransactions operation');
-          }
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/blocks/${blockId}/transactions`,
-            headers: {
-              'Authorization': `Bearer ${credentials.apiKey}`,
-              'Content-Type': 'application/json',
-            },
-            json: true,
-          };
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-
-        default:
-          throw new NodeOperationError(this.getNode(), `Unknown operation: ${operation}`);
-      }
-
-      returnData.push({
-        json: result,
-        pairedItem: { item: i },
-      });
-
-    } catch (error: any) {
-      if (error.httpCode) {
-        throw new NodeApiError(this.getNode(), error, { itemIndex: i });
-      }
-
-      if (this.continueOnFail()) {
-        returnData.push({
-          json: { error: error.message },
-          pairedItem: { item: i },
-        });
-      } else {
-        throw new NodeOperationError(this.getNode(), error.message, { itemIndex: i });
-      }
-    }
-  }
-
-  return returnData;
-}
-
-async function executeTransactionsOperations(
-  this: IExecuteFunctions,
-  items: INodeExecutionData[],
-): Promise<INodeExecutionData[]> {
-  const returnData: INodeExecutionData[] = [];
-  const operation = this.getNodeParameter('operation', 0) as string;
-  const credentials = await this.getCredentials('polymeshApi') as any;
-
-  for (let i = 0; i < items.length; i++) {
-    try {
-      let result: any;
-      
-      switch (operation) {
-        case 'getTransaction': {
-          const txHash = this.getNodeParameter('txHash', i) as string;
-          
-          if (!txHash) {
-            throw new NodeOperationError(this.getNode(), 'Transaction hash is required');
-          }
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/transactions/${txHash}`,
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${credentials.apiKey}`,
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'listTransactions': {
-          const blockNumber = this.getNodeParameter('blockNumber', i) as number;
-          const address = this.getNodeParameter('address', i) as string;
-          const size = this.getNodeParameter('size', i) as number;
-          const start = this.getNodeParameter('start', i) as number;
-
-          const queryParams: any = {};
-          if (blockNumber) queryParams.blockNumber = blockNumber;
-          if (address) queryParams.address = address;
-          if (size) queryParams.size = Math.min(size, 100);
-          if (start) queryParams.start = start;
-
-          const queryString = Object.keys(queryParams).length > 0 
-            ? '?' + new URLSearchParams(queryParams).toString()
-            : '';
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/transactions${queryString}`,
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${credentials.apiKey}`,
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        case 'getTransactionEvents': {
-          const txHash = this.getNodeParameter('txHash', i) as string;
-          
-          if (!txHash) {
-            throw new NodeOperationError(this.getNode(), 'Transaction hash is required');
-          }
-
-          const options: any = {
-            method: 'GET',
-            url: `${credentials.baseUrl}/transactions/${txHash}/events`,
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${credentials.apiKey}`,
-            },
-            json: true,
-          };
-          
-          result = await this.helpers.httpRequest(options) as any;
-          break;
-        }
-        
-        default:
-          throw new NodeOperationError(this.getNode(), `Unknown operation: ${operation}`);
-      }
-      
-      returnData.push({
-        json: result,
-        pairedItem: { item: i },
-      });
-      
-    } catch (error: any) {
-      if (this.continueOnFail()) {
-        returnData.push({
-          json: { error: error.message },
-          pairedItem: { item: i },
-        });
-      } else {
-        if (error.httpCode) {
-          throw new NodeApiError(this.getNode(), error);
-        }
-        throw new NodeOperationError(this.getNode(), error.message);
-      }
-    }
-  }
-  
-  return returnData;
-}
+              'Content-Type': 'application/json
